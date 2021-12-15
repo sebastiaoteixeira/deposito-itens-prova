@@ -1,15 +1,19 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <school-blocks-buttons/>
+    <content-menu/>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import SchoolBlocksButtons from './components/SchoolBlocksButtons.vue';
+import ContentMenu from './components/ContentMenu.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    "school-blocks-buttons": SchoolBlocksButtons,
+    "content-menu": ContentMenu
   }
 }
 </script>
@@ -22,5 +26,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  max-width: 720px;
 }
 </style>
