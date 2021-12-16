@@ -1,6 +1,6 @@
 <template>
   <div>
-    <button v-for="tab in SchoolBlocks" :key="tab">
+    <button v-for="(tab, index) in SchoolBlocks" :key="tab" @click="set_block(index)">
       {{ tab }}
     </button>
   </div>
@@ -9,11 +9,17 @@
 <script>
 export default {
   name: "SchoolBlocksButtons",
+  emits: ['block-changed'],
   data() {
     return {
       SchoolBlocks: ["1º Ciclo", "2º Ciclo", "3º Ciclo", "Secundário"],
     };
   },
+  methods: {
+    set_block(id) {
+      this.$emit('block-changed', id)
+    }
+  }
 };
 </script>
 

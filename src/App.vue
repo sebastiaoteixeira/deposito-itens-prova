@@ -1,7 +1,7 @@
 <template>
   <div>
-    <school-blocks-buttons/>
-    <content-menu/>
+    <school-blocks-buttons @block-changed="update"/>
+    <content-menu :block="this.current_block"/>
   </div>
 </template>
 
@@ -11,9 +11,18 @@ import ContentMenu from './components/ContentMenu.vue';
 
 export default {
   name: 'App',
+  data() {
+    return {current_block: 0 }
+  },
   components: {
     "school-blocks-buttons": SchoolBlocksButtons,
     "content-menu": ContentMenu
+  },
+  methods: {
+    update(block_id) {
+      this.current_block = block_id;
+      console.log(block_id)
+    }
   }
 }
 </script>
@@ -29,6 +38,6 @@ export default {
   margin-left: auto;
   margin-right: auto;
   width: 100%;
-  max-width: 720px;
+  max-width: 960px;
 }
 </style>
