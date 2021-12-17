@@ -1,6 +1,6 @@
 <template>
   <div class="w3-bar w3-block">
-    <button v-for="(tab, index) in SchoolBlocks" :key="tab" class="w3-btn w3-topbar w3-border-blue w3-bar-item" :class="IsSelected(index)" @click="set_block(index)">
+    <button v-for="(tab, index) in SchoolBlocks" :key="tab" class="w3-btn w3-topbar w3-border-blue w3-bar-item" :class="ButtonStyles(index)" @click="SetBlock(index)">
       {{ tab }}
     </button>
   </div>
@@ -17,24 +17,34 @@ export default {
     };
   },
   methods: {
-    set_block(id) {
-      this.block = id;
-      this.$emit('block-changed', id);
+    SetBlock(BlockId) {
+      this.block = BlockId;
+      this.$emit('block-changed', BlockId);
     },
 
-    IsSelected(btn) {
-      if (btn == this.block) {
-        return "w3-blue  w3-animate-bottom";
-      } else {
-       return "w3-light-grey w3-hover-light-blue";
-      }
+    ButtonStyles(btn) {
+      let classes = ""
+      classes += btn == this.block ? "w3-blue  w3-animate-bottom " : "w3-light-grey w3-hover-light-blue ";
+      classes += (btn == 3 ? "long-button" : "short-button")
+      return classes
     }
   }
 };
 </script>
 
 <style scoped>
-  button {
-    width: 25% !important;
+  .long-button {
+    width: 28% !important;
   }
+  
+  .short-button {
+    width: 24% !important;
+  }
+  
+  @media only screen and (max-width: 768px) {
+    button {  
+      padding-inline: 10px !important;
+    }
+  }
+
 </style>
