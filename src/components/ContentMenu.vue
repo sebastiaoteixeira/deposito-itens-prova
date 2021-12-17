@@ -1,5 +1,5 @@
 <template>
-  <div id="container">
+  <div id="container" class="w3-container w3-border w3-round">
     <component :is="page" :block="block"></component>
   </div>
 </template>
@@ -26,8 +26,7 @@ export default {
 </script>
 
 <style scoped>
-#container {
-  border: 1px solid;
-  size: auto;
-}
+  #container {
+    min-height: 240px;
+  }
 </style>

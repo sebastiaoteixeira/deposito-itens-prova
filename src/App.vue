@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="w3-animate-opacity">
     <school-blocks-buttons @block-changed="update"/>
     <content-menu :block="this.current_block"/>
   </div>
@@ -37,7 +37,7 @@ export default {
   margin-top: 60px;
   margin-left: auto;
   margin-right: auto;
-  width: 100%;
+  width: 95%;
   max-width: 960px;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <button v-for="(tab, index) in SchoolBlocks" :key="tab" @click="set_block(index)">
+  <div class="w3-bar w3-block">
+    <button v-for="(tab, index) in SchoolBlocks" :key="tab" class="w3-btn w3-topbar w3-border-blue w3-bar-item" :class="IsSelected(index)" @click="set_block(index)">
       {{ tab }}
     </button>
   </div>
@@ -13,22 +13,28 @@ export default {
   data() {
     return {
       SchoolBlocks: ["1º Ciclo", "2º Ciclo", "3º Ciclo", "Secundário"],
+      block: null
     };
   },
   methods: {
     set_block(id) {
-      this.$emit('block-changed', id)
+      this.block = id;
+      this.$emit('block-changed', id);
+    },
+
+    IsSelected(btn) {
+      if (btn == this.block) {
+        return "w3-blue  w3-animate-bottom";
+      } else {
+       return "w3-light-grey w3-hover-light-blue";
+      }
     }
   }
 };
 </script>
 
 <style scoped>
-button {
-  color: black;
-  margin-right: 2px;
-  margin-left: 2px;
-  width: 22%;
-  padding: 1px;
-}
+  button {
+    width: 25% !important;
+  }
 </style>
