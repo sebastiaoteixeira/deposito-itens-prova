@@ -7,16 +7,16 @@
 
 <script>
 import SchoolBlocksButtons from './components/SchoolBlocksButtons.vue';
-import ContentMenu from './components/ContentMenu.vue';
+import ContentContainer from './components/ContentContainer.vue';
 
 export default {
   name: 'App',
   data() {
-    return {current_block: 0 }
+    return { current_block: null }
   },
   components: {
     "school-blocks-buttons": SchoolBlocksButtons,
-    "content-menu": ContentMenu
+    "content-menu": ContentContainer
   },
   methods: {
     update(block_id) {
@@ -39,5 +39,13 @@ export default {
   margin-right: auto;
   width: 95%;
   max-width: 960px;
+}
+
+input,
+textarea,
+button,
+select,
+a {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 </style>
