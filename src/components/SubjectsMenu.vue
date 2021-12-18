@@ -39,14 +39,4 @@ export default {
 		margin : 10px;
 		padding: 12px;
 	}
-
-	.right-slide {
-		position:relative;
-		animation:right-slide 0.4s;
-		animation-fill-mode: forwards;
-	}
-	@keyframes right-slide{
-		from{right:0px;opacity:1}
-		to{right:960px;opacity:0}
-	}
 </style>
