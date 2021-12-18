@@ -1,7 +1,5 @@
 <template>
-  <div class="w3-bar w3-grey">
-      <div class="w3-bar-item"></div>
-  </div>
+  <div></div>
 </template>
 
 <script>

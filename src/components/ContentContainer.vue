@@ -1,20 +1,21 @@
 <template>
-  <div id="container" class="w3-container w3-border w3-soft-grey">
-    <transition name="slide-fade">
+  <div id="container" class="w3-container w3-border">
+    <transition name="slide-fade" mode="out-in">
       <component :is="page" :[ComponentProps]="ComponentData"
-      @next-page="GoToItemsMenu"></component>
+      @next-page="GoToItemsMenu" id="page"></component>
     </transition>
   </div>
 </template>
 
 <script>
-import SubjectsMenu from "./SubjectsMenu.vue";
-import ItemsMenu from "./ItemsMenu.vue";
+import SubjectsMenu from "../components/SubjectsMenu.vue";
+import ItemsMenu from "../components/ItemsMenu.vue";
+import InitialPage from "../components/InitialPage.vue";
 
 export default {
   data() {
     return {
-      page: "subject-menu",
+      page: "initial-page",
       subject: null,
       ComponentProps: "block"
     }
@@ -50,6 +51,7 @@ export default {
     }
   },
   components: {
+    "initial-page": InitialPage,
     "subject-menu": SubjectsMenu,
     "items-menu": ItemsMenu
   }
@@ -61,16 +63,29 @@ export default {
     min-height: 360px;
     border-top: none !important;
     border-radius: 0 0 10px 10px;
+    padding: 0;
     overflow: hidden;
   }
 
-	.slide-fade-leave-to {
-		position:relative;
-		animation:right-slide-fade 0.6s;
-		animation-fill-mode: forwards;
+  #page {
+    position: relative;
+    opacity: 1;
+    right: 0px;
+  }
+
+  .slide-fade-enter-active {
+    transition: all 0.3s ease;
+  }
+	.slide-fade-enter-from {
+    right: -960px !important;
+		opacity: 0 !important;
 	}
-	@keyframes right-slide-fade{
-		from{right:0px;opacity:1}
-		to{right:960px;opacity:0}
+
+  .slide-fade-leave-active {
+    transition: all 0.3s ease;
+  }
+  .slide-fade-leave-to {
+		right:960px !important;
+    opacity:0 !important;
 	}
 </style>
