@@ -1,6 +1,6 @@
 <template>
   <div>
-		<filters/>
+		<filters :block="block"/>
   </div>
 </template>
 
@@ -8,6 +8,7 @@
 import Filters from '../components/Filters.vue'
 
 export default {
+	props: ["block", "subject"],
 	components: {
 		"filters": Filters
 	}

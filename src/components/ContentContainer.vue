@@ -1,7 +1,7 @@
 <template>
   <div id="container" class="w3-container w3-border">
     <transition name="slide-fade" mode="out-in">
-      <component :is="page" :[ComponentProps]="ComponentData"
+      <component :is="page" :block="block" :subject="subject"
       @next-page="GoToItemsMenu" id="page"></component>
     </transition>
   </div>
@@ -16,38 +16,24 @@ export default {
   data() {
     return {
       page: "initial-page",
-      subject: null,
-      ComponentProps: "block"
+      subject: null
     }
   },
   props: ['block'],
   watch: {
     block() {
-      this.GoTo('subject-menu')
-      this.subject = null
-      this.ComponentProps = "block"
-    }
-  },
-  computed: {
-    ComponentData (){
-      if (this.page === 'subject-menu') {
-        return this.block
-      } else if (this.page === "items-menu") {
-        return this.subject
-      } else {
-        return null
-      }
+      this.GoTo('subject-menu');
+      this.subject = null;
     }
   },
   methods: {
     GoTo(NewPage){
       console.log(NewPage)
-      this.page = NewPage
+      this.page = NewPage;
     },
     GoToItemsMenu(subject) {
-      this.GoTo('items-menu')
-      this.subject = subject
-      this.ComponentProps = "subject"
+      this.GoTo('items-menu');
+      this.subject = subject;
     }
   },
   components: {
