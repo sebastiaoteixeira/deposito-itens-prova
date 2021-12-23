@@ -1,46 +1,34 @@
 <template>
   <div id="container" class="w3-container w3-border">
-    <transition name="slide-fade" mode="out-in">
-      <component :is="page" :block="block" :subject="subject"
-      @next-page="GoToItemsMenu" id="page"></component>
-    </transition>
+    <router-view v-slot="{ Component }">
+      <transition :name="transitionName" mode="out-in">
+        <component :is="Component" id="page" />
+      </transition>
+    </router-view>
   </div>
 </template>
 
 <script>
-import SubjectsMenu from "../components/SubjectsMenu.vue";
-import ItemsMenu from "../components/ItemsMenu.vue";
-import InitialPage from "../components/InitialPage.vue";
-
 export default {
   data() {
     return {
       page: "initial-page",
+      transitionName: 'slide-right-fade',
       subject: null
     }
   },
-  props: ['block'],
   watch: {
-    block() {
-      this.GoTo('subject-menu');
-      this.subject = null;
+    '$route' (to, from) {
+      const toDepth = to.path.split('/').length
+      const fromDepth = from.path.split('/').length
+      if (to.path.split('/')[1] == from.path.split('/')[1]) {
+        this.transitionName = toDepth > fromDepth ? 'slide-right-fade' : 'slide-left-fade'
+      } else {
+        this.transitionName = to.path.split('/')[1] > from.path.split('/')[1] ? 'slide-right-fade' : 'slide-left-fade'
+      }
     }
   },
-  methods: {
-    GoTo(NewPage){
-      console.log(NewPage)
-      this.page = NewPage;
-    },
-    GoToItemsMenu(subject) {
-      this.GoTo('items-menu');
-      this.subject = subject;
-    }
-  },
-  components: {
-    "initial-page": InitialPage,
-    "subject-menu": SubjectsMenu,
-    "items-menu": ItemsMenu
-  }
+  props: ['block']
 };
 </script>
 
@@ -59,19 +47,23 @@ export default {
     right: 0px;
   }
 
-  .slide-fade-enter-active {
-    transition: all 0.3s ease;
+  .slide-right-fade-enter-active, .slide-right-fade-leave-active, .slide-left-fade-enter-active, .slide-left-fade-leave-active {
+    transition: all 0.4s ease;
   }
-	.slide-fade-enter-from {
+	.slide-right-fade-enter-from {
     right: -960px !important;
 		opacity: 0 !important;
 	}
-
-  .slide-fade-leave-active {
-    transition: all 0.3s ease;
-  }
-  .slide-fade-leave-to {
-		right:960px !important;
-    opacity:0 !important;
+  .slide-right-fade-leave-to {
+		right: 960px !important;
+    opacity: 0 !important;
+	}
+  .slide-left-fade-enter-from {
+    right: 960px !important;
+		opacity: 0 !important;
+	}
+  .slide-left-fade-leave-to {
+		right: -960px !important;
+    opacity: 0 !important;
 	}
 </style>

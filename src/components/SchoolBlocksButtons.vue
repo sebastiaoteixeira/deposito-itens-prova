@@ -19,6 +19,7 @@ export default {
   methods: {
     SetBlock(BlockId) {
       this.block = BlockId;
+      this.$router.push({ name: 'Subjects Menu', params: {BlockId} })
       this.$emit('block-changed', BlockId);
     },
 

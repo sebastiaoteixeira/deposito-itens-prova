@@ -2,7 +2,7 @@
 	<div id="subjects-container">
 		<div>
 			<button
-				v-for="subject in subjects[block]"
+				v-for="subject in subjects[this.$route.params.BlockId]"
 				:key="subject"
 				class="w3-btn w3-white w3-hover-light-grey w3-round-xlarge"
 				@click="GoToContentPage(subject)">
@@ -22,10 +22,13 @@ export default {
 	emits: ["next-page"],
 	methods: {
 		GoToContentPage(subject) {
-			this.$emit('next-page', subject);
+			let self = this
+			this.$router.push({ name: 'Items Menu', params: {
+				BlockId: self.$route.params.BlockId,
+				Subject: subject}
+			})
 		}
-	},
-	props: ['block']
+	}
 }
 </script>
 

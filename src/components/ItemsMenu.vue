@@ -8,7 +8,11 @@
 import Filters from '../components/Filters.vue'
 
 export default {
-	props: ["block", "subject"],
+	data() {
+		return {
+			block: this.$route.params.BlockId
+		}
+	},
 	components: {
 		"filters": Filters
 	}
